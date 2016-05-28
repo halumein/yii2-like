@@ -1,6 +1,6 @@
 {
-    "name": "halumein/yii2-wishlist",
-    "description": "Кнопка добавить в избранное",
+    "name": "halumein/yii2-like-module",
+    "description": "LIKE button module",
     "keywords": ["yii2", "yii2", "application"],
     "homepage": "https://github.com/halumein",
     "type": "yii2-extension",
