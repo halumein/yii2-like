@@ -1,24 +1,29 @@
-.hal-wishlist-button {
-  font-weight: 700; }
-  .hal-wishlist-button:before {
-    content: "\f08a";
-    font: 400 15px/31px "FontAwesome";
-    color: white;
-    background: #929292; /* цвет сердечка */
-    width: 30px;
-    text-align: center;
-    display: inline-block;
-    height: 30px;
-    margin: 0 6px 0 0;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    border-radius: 50px; }
-
-  .hal-wishlist-button:hover {
-      cursor: pointer;
-  }
 
 
-.in-list:before {
-      background: #CC63B0; /* цвет сердечка */
+.hal-like-button, .hal-like-button-my-likes {
+    height: 40px;
+    display: table-cell;
+    vertical-align: bottom;
+    font-size: 16pt;
+}
+
+.hal-like-button {
+    cursor: pointer;
+}
+
+.hal-like-button:after, .hal-like-button-my-likes:after {
+    content: "";
+    float: right;
+    margin-left: 5px;
+    background-image: url('/images/reyting.png');
+    min-height: 25px;
+    min-width: 25px;
+    height: 25px;
+    width: 25px;
+    background-repeat: no-repeat;
+    background-size: 80%;
+}
+
+.in-list:after, .hal-like-button-my-likes:after {
+    background-image: url('/images/reyting_up.png');
 }

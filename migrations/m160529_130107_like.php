@@ -1,16 +1,16 @@
 <?php
 
-use yii\db\Schema;
 use yii\db\Migration;
+use yii\db\Schema;
 
-class m160518_074611_wishlist extends Migration
+class m160529_130107_like extends Migration
 {
     public function safeUp()
     {
         $tableOptions = 'ENGINE=InnoDB';
 
         $this->createTable(
-            '{{%wishlist}}',
+            '{{%like}}',
             [
                 'id'=> Schema::TYPE_PK."",
                 'user_id'=> Schema::TYPE_INTEGER."(11) NOT NULL",
@@ -24,6 +24,6 @@ class m160518_074611_wishlist extends Migration
 
     public function safeDown()
     {
-        $this->dropTable('{{%wishlist}}');
+        $this->dropTable('{{%like}}');
     }
 }

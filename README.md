@@ -1,4 +1,4 @@
-Yii2-wishlist
+Yii2-Like-module
 ==========
 Модуль избранного для Yii2 фреймворка. ДЛЯ АВТОРИЗОВАННЫХ ПОЛЬЗОВАТЕЛЕЙ
 
@@ -14,17 +14,17 @@ Yii2-wishlist
 Далее, мигрируем базу:
 
 ```
-php yii migrate --migrationPath=vendor/halumein/yii2-wishlist/migrations
+php yii migrate --migrationPath=vendor/halumein/yii2-like-module/migrations
 ```
 
 Подключение и настройка
 ---------------------------------
-В конфигурационный файл приложения добавить модуль wishlist
+В конфигурационный файл приложения добавить модуль like
 
 ```php
     'modules' => [
-        'wishlist' => [
-            'class' => 'halumein\wishlist\Module',
+        'like' => [
+            'class' => 'halumein\like\Module',
         ],
         //...
     ]
@@ -37,16 +37,16 @@ php yii migrate --migrationPath=vendor/halumein/yii2-wishlist/migrations
 ```php
 
 <?php
-use halumein\wishlist\widgets\WishlistButton;
+use halumein\like\widgets\LikeButton;
 ?>
 
 <?php /* Выведет кнопку "добавить в избранное" */ ?>
-<?= WishlistButton::widget([
+<?= LiketButton::widget([
 	'model' => $model
 ]) ?>
 
 <?php /* Выведет кнопку "добавить в избранное" с пользовательскими параметрами */ ?>
-<?= WishlistButton::widget([
+<?= LikeButton::widget([
 	'model' => $model, // модель для добавления
 	'text' => 'Добавить мой список', // свой текст кнопки
 	'htmlTag' => 'a', // тэг
@@ -59,32 +59,7 @@ use halumein\wishlist\widgets\WishlistButton;
 Дэфолтные css-стили
 ```css
 
-.hal-wishlist-button {
-    font-weight: 700;
-}
 
-.hal-wishlist-button:before {
-    content: "\f08a";
-    font: 400 15px/31px "FontAwesome";
-    color: white;
-    background: #929292; /* цвет сердечка */
-    width: 30px;
-    text-align: center;
-    display: inline-block;
-    height: 30px;
-    margin: 0 6px 0 0;
-    -moz-border-radius: 50px;
-    -webkit-border-radius: 50px;
-    border-radius: 50px;
-}
-
-.hal-wishlist-button:hover {
-    cursor: pointer;
-}
-
-.in-list:before {
-    background: #CC63B0; /* цвет сердечка */
-}
 
 
 ```

@@ -1,9 +1,9 @@
 <?php
 
-namespace halumein\wishlist;
+namespace halumein\like;
 
 /**
- * wishlist module definition class
+ * like module definition class
  */
 class Module extends \yii\base\Module
 {

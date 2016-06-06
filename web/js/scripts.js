@@ -1,6 +1,6 @@
 $(function () {
 
-    var wishlist = {
+    var like = {
             addElement: function (model, itemId, url, button) {
                 $.post({
                     url: url,
@@ -13,7 +13,7 @@ $(function () {
                             $(button).data('action', 'remove').attr('data-action', 'remove');
                             $(button).data('url', response.url).attr('data-url', response.url);
                             $(button).addClass('in-list');
-                            $(button).text('В желаемом');
+                            $(button).text(response.totalCount);
                             return true;
                         } else {
                             $(button).data('action', 'add').attr('data-action', 'add');
@@ -38,7 +38,7 @@ $(function () {
                             $(button).data('action', 'add').attr('data-action', 'add');
                             $(button).data('url', response.url).attr('data-url', response.url);
                             $(button).removeClass('in-list');
-                            $(button).text('В список желаемого');
+                            $(button).text(response.totalCount);
                             return true;
                         } else {
                             $(button).data('action', 'remove').attr('data-action', 'remove');
@@ -53,7 +53,7 @@ $(function () {
             },
         };
 
-    $(document).on('click', '[data-role=hal_wishlist_button]',function () {
+    $(document).on('click', '[data-role=hal_like_button]',function () {
         var self = this,
             model = $(self).data('model'),
             itemId = $(self).data('item-id'),
@@ -61,9 +61,9 @@ $(function () {
             url = $(self).data('url');
 
         if (action === 'add') {
-            wishlist.addElement(model, itemId, url, self);
+            like.addElement(model, itemId, url, self);
         } else if (action === 'remove') {
-            wishlist.removeElement(model, itemId, url, self);
+            like.removeElement(model, itemId, url, self);
         }
     });
 

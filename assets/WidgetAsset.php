@@ -1,5 +1,5 @@
 <?php
-namespace halumein\wishlist\assets;
+namespace halumein\like\assets;
 
 use yii\web\AssetBundle;
 

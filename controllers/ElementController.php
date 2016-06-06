@@ -1,15 +1,16 @@
 <?php
 
-namespace halumein\wishlist\controllers;
+namespace halumein\like\controllers;
 
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use halumein\wishlist\models\Wishlist;
 use yii\helpers\Url;
+use yii\filters\VerbFilter;
+use halumein\like\models\Like;
+
 
 
 /**
- * Default controller for the `wishlist` module
+ * Default controller for the `like` module
  */
 class ElementController extends Controller
 {
@@ -33,19 +34,20 @@ class ElementController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        var_dump('index');
+        die;
     }
 
     public function actionAdd()
     {
-        $wishlistModel = new Wishlist();
+        $likeModel = new Like();
 
         $postData = \Yii::$app->request->post();
 
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
-        // небольшая проверка на случай если уже добавлен из модального окна или на другой вкладке
-        $checkModel = Wishlist::find()->where([
+        // небольшая проверка на случай если уже поставлен, например на другой вкладке браузера
+        $checkModel = Like::find()->where([
             'user_id' => \Yii::$app->user->getId(),
             'model' => $postData['model'],
             'item_id' => $postData['itemId'],
@@ -54,18 +56,26 @@ class ElementController extends Controller
         if ($checkModel) {
             return [
                 'response' => true,
-                'url' => Url::toRoute('/wishlist/element/remove'),
+                'url' => Url::toRoute('/like/element/remove'),
+                'totalCount' => Like::find()->where([
+                    'model' => $postData['model'],
+                    'item_id' => $postData['itemId'],
+                    ])->count()
             ];
         }
 
-        $wishlistModel->user_id = \Yii::$app->user->getId();
-        $wishlistModel->model = $postData['model'];
-        $wishlistModel->item_id = $postData['itemId'];
+        $likeModel->user_id = \Yii::$app->user->getId();
+        $likeModel->model = $postData['model'];
+        $likeModel->item_id = $postData['itemId'];
 
-        if ($wishlistModel->save()) {
+        if ($likeModel->save()) {
             return [
                 'response' => true,
-                'url' => Url::toRoute('/wishlist/element/remove'),
+                'url' => Url::toRoute('/like/element/remove'),
+                'totalCount' => Like::find()->where([
+                    'model' => $postData['model'],
+                    'item_id' => $postData['itemId'],
+                    ])->count()
             ];
         }
 
@@ -75,11 +85,12 @@ class ElementController extends Controller
 
     }
 
+
     public function actionRemove()
     {
         $postData = \Yii::$app->request->post();
 
-        $elementModel = Wishlist::find()->where([
+        $likeModel = Like::find()->where([
             'user_id' => \Yii::$app->user->getId(),
             'model' => $postData['model'],
             'item_id' => $postData['itemId'],
@@ -88,17 +99,27 @@ class ElementController extends Controller
         \Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
 
         // небольшая проверка на случай если уже удалено из модального окна или на другой вкладке
-        if ($elementModel) {
-            if ($elementModel->delete()) {
+        if ($likeModel) {
+            // удаляем
+            if ($likeModel->delete()) {
                 return [
                     'response' => true,
-                    'url' => Url::toRoute('/wishlist/element/add'),
+                    'url' => Url::toRoute('/like/element/add'),
+                    'totalCount' => Like::find()->where([
+                        'model' => $postData['model'],
+                        'item_id' => $postData['itemId'],
+                        ])->count()
                 ];
             }
+        // если уже удалено ранее
         } else {
             return [
                 'response' => true,
-                'url' => Url::toRoute('/wishlist/element/add'),
+                'url' => Url::toRoute('/like/element/add'),
+                'totalCount' => Like::find()->where([
+                    'model' => $postData['model'],
+                    'item_id' => $postData['itemId'],
+                    ])->count()
             ];
         }
 
@@ -106,5 +127,6 @@ class ElementController extends Controller
             'response' => false
         ];
     }
+
 
 }
