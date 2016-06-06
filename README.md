@@ -32,7 +32,7 @@ php yii migrate --migrationPath=vendor/halumein/yii2-like-module/migrations
 
 Виджеты
 ==========
-Кнопка добавить/убрать объект в избранное.
+Кнопка-аналог лайков/рейтинга и т.д..
 
 ```php
 
@@ -40,19 +40,11 @@ php yii migrate --migrationPath=vendor/halumein/yii2-like-module/migrations
 use halumein\like\widgets\LikeButton;
 ?>
 
-<?php /* Выведет кнопку "добавить в избранное" */ ?>
+<?php /* Выведет кнопку поднатия рейтинга/лайка и т.д. */ ?>
 <?= LiketButton::widget([
 	'model' => $model
 ]) ?>
 
-<?php /* Выведет кнопку "добавить в избранное" с пользовательскими параметрами */ ?>
-<?= LikeButton::widget([
-	'model' => $model, // модель для добавления
-	'text' => 'Добавить мой список', // свой текст кнопки
-	'htmlTag' => 'a', // тэг
-	'cssClass' => 'custom_class' // свой класс
-    'cssClassInList' => 'custom_class' // свой класс для добавленного объекта
-]) ?>
 
 ```
 
