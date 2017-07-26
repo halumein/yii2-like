@@ -8,8 +8,15 @@ Yii2-Like-module
 Выполнить команду
 
 ```
+composer require halumein/yii2-like-module "*"
+```
+
+Либо в composer.json строку:
 
 ```
+"halumein/yii2-like-module": "dev-master",
+```
+
 
 Далее, мигрируем базу:
 
